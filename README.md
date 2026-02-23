@@ -19,6 +19,7 @@ nimu oxshash yerge chüshürüp Visual Studio da yughursa(compile) bolidu.
 - Tinish belgilerni qoyush
 - Abzaslargha ayrish
 
+## Ékran körünüshi
 <p>
-  <img src="ekran.png" width="50%" height="50%"/>
+  <img src="ekran.png" />
 </p>
