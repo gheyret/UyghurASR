@@ -11,6 +11,7 @@ The core model was designed using **PyTorch** and trained on a combination of cu
 ## Note for Developers
 
 If you plan to work directly with the source code, please download the pre-trained model file below and place it in the project directory before compiling with **Visual Studio**:
+
 [Download uyghur_asr.onnx](https://github.com/gheyret/UyghurASR/releases/download/v0/uyghur_asr.onnx)
 
 ## Roadmap (Future Plans)
