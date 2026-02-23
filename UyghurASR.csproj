@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>disable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<StartupObject>UyghurASR.App</StartupObject>
+		<ApplicationIcon>uasr.ico</ApplicationIcon>
+		<PlatformTarget>x64</PlatformTarget>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="C:\Users\gheyr\.nuget\packages\naudio.vorbis\1.5.0\contentFiles\any\netstandard2.0\README.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="uasr.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Concentus" Version="2.2.2" />
+		<PackageReference Include="Concentus.Oggfile" Version="1.0.6" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.23.2" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
+		<PackageReference Include="NVorbis" Version="0.10.5" />
+		<PackageReference Include="OpusSharp" Version="1.6.1" />
+		<PackageReference Include="OpusSharp.Core" Version="1.6.0.1" />
+		<PackageReference Include="OpusSharp.Natives" Version="1.6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="uyghur_asr.onnx">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

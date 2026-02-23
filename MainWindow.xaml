@@ -1,0 +1,266 @@
+<Window x:Class="UyghurASR.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Uyghurche Aptomatik Awaz Tonush(Uyghur ASR)"
+        Height="800"
+        Width="1200"
+        MinHeight="750"
+        MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        AllowDrop="True"
+        PreviewDragEnter="Window_DragEnter"
+        PreviewDrop="Window_DragDrop"
+        Background="{StaticResource BackgroundBrush}"
+        Foreground="{StaticResource TextPrimaryBrush}"
+        FontFamily="Segoe UI"
+        FontSize="13">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0"
+                Background="{StaticResource PrimaryBrush}"
+                Padding="24,16">
+            <StackPanel>
+                <TextBlock Text="Uyghurche Awaz Tonush"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="Awazni Tékistke Aylandurush"
+                           FontSize="14"
+                           Foreground="#93C5FD"
+                           Opacity="0.9"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Tab Control for Audio Input -->
+        <TabControl Grid.Row="1"
+                    x:Name="tabControlAudio"
+                    AllowDrop="True"
+                    PreviewDragEnter="Window_DragEnter"
+                    PreviewDrop="Window_DragDrop"
+                    Style="{StaticResource ModernTabControlStyle}"
+                    Margin="0">
+
+            <!-- File Input Tab -->
+            <TabItem Header="Awaz Höjjiti" x:Name="tabHojjet">
+                <Grid Background="{StaticResource BackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="59.29"/>
+                        <RowDefinition Height="Auto" MinHeight="47"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Instructions -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                               Margin="24,3,24,10"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="Awaz höjjitini mushu yerge sörep tashlang yaki 'Talla' ni besing. Qollaydighan formatlar: MP3, MP4,OGG, MPEG, WAV, WMA, AAC, FLAC"/>
+
+                    <!-- File Path Section -->
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            Margin="24,0,12,16"
+                            Background="{StaticResource SurfaceBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6">
+                        <TextBox x:Name="textBoxFilePath"
+                                 Padding="10"
+                                 IsReadOnly="True"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{StaticResource TextSecondaryBrush}"
+                                 Text="Höjjet tallanmidi"/>
+                    </Border>
+
+                    <!-- Browse Button -->
+                    <Button Grid.Row="1" Grid.Column="2"
+                            x:Name="buttonBrowse"
+                            Content="Talla"
+                            Margin="0,2,24,17"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="buttonBrowse_Click"/>
+
+                    <!-- Actions and Status -->
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               x:Name="statusLabel"
+                               Margin="24,6,12,0"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               VerticalAlignment="Top"
+                               Text="" Height="41"/>
+
+                    <Button Grid.Row="2" Grid.Column="2"
+                            x:Name="buttonRecognizeFile"
+                            Content="Tonu"
+                            Width="100"
+                            Height="40"
+                            IsEnabled="False"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="buttonRecognizeFile_Click"
+                            Margin="0,3,24,0"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Recording Tab -->
+            <TabItem Header="Mikrofon" Name="tabMic">
+                <Grid Background="{StaticResource BackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Instructions -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                               Margin="24,16,24,12"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="'Bashla' ni bésip Mikrofon’gha yéqinraq kélip sözleng. Sözlep bolghanda 'Tamam' ni bésing."/>
+
+                    <!-- Controls and Status (Right) -->
+                    <StackPanel Grid.Row="1" Grid.Column="1"
+                                Orientation="Vertical"
+                                Margin="12,12,24,12"
+                                VerticalAlignment="Top">
+                        <!-- Buttons -->
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,12">
+                            <Button x:Name="buttonStartRecording"
+                                    Content="Bashla"
+                                    Width="100"
+                                    Height="40"
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Click="buttonStartRecording_Click"
+                                    Margin="0,0,8,0"/>
+                            <Button x:Name="buttonStopRecording"
+                                    Content="Tamam"
+                                    Width="100"
+                                    Height="40"
+                                    IsEnabled="False"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Click="buttonStopRecording_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Real-time Tab -->
+            <TabItem Header="Mikrofon-Üzüksiz" Name="tabUzuksiz">
+                <Grid Background="{StaticResource BackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Instructions -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                               Margin="24,6,24,6"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="'Bashla' ni bésip Mikrofon’gha yéqinraq kélip sözlewéring. Tinipraq sözleng. Axirida 'Toxta' ni bésing."/>
+
+                    <!-- Controls and Status (Right) -->
+                    <StackPanel Grid.Row="1" Grid.Column="1"
+                                Orientation="Vertical"
+                                Margin="12,12,24,12"
+                                VerticalAlignment="Top">
+                        <!-- Buttons -->
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,12">
+                            <Button x:Name="buttonStartRealTime"
+                                    Content="Bashla"
+                                    Width="100"
+                                    Height="40"
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Click="buttonStartRealTime_Click"
+                                    Margin="0,0,8,0"/>
+                            <Button x:Name="buttonStopRealTime"
+                                    Content="Toxta"
+                                    Width="100"
+                                    Height="40"
+                                    IsEnabled="False"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Click="buttonStopRealTime_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Divider -->
+        <Border Grid.Row="2"
+                Background="{StaticResource BorderBrush}"
+                Height="1"/>
+
+        <!-- Results Section -->
+        <GroupBox Grid.Row="3"
+                  Margin="8"
+                  Style="{StaticResource ModernGroupBoxStyle}"
+                  Header="Tonush Netijisi">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Results TextBox -->
+                <TextBox Grid.Row="0"
+                         x:Name="textBoxResults"
+                         Style="{StaticResource ModernTextBoxStyle}"
+                         FontSize="14"
+                         IsReadOnly="True"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         Margin="-15,-15,-15,8"
+                         Text="Tonush netijisi bu yerde körünidu..."/>
+
+                <!-- Action Buttons -->
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <Button x:Name="buttonCopy"
+                            Content="Köchür"
+                            Width="100"
+                            Height="36"
+                            Margin="0,0,12,0"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="buttonCopy_Click"/>
+                    <Button x:Name="buttonClear"
+                            Content="Tazila"
+                            Width="100"
+                            Height="36"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="buttonClear_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
