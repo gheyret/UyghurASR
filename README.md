@@ -10,6 +10,7 @@ https://github.com/gheyret/UyghurASR/releases/download/v0/UyghurASR.zip
 ## Diqqet
 Esli kodtin paydilinidighanlar esli kodni chüshürüp yayghandin kéyin, 
 [https://github.com/gheyret/UyghurASR/releases/download/v0/UyghurASR.zip](https://github.com/gheyret/UyghurASR/releases/download/v0/uyghur_asr.onnx)
+
 nimu oxshash yerge chüshürüp Visual Studio da yughursa(compile) bolidu.
 
 ## Kéyinki Pilan
