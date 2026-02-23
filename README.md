@@ -18,3 +18,7 @@ nimu oxshash yerge chüshürüp Visual Studio da yughursa(compile) bolidu.
 - LLM ishlitip imla tüzitish
 - Tinish belgilerni qoyush
 - Abzaslargha ayrish
+
+<p>
+  <img src="ekran.png" width="50%" height="50%"/>
+</p>
