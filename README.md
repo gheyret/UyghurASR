@@ -7,6 +7,10 @@ Hazirqi LLM ishlitilgen awaz tonush modéllirigha sélishturghili bolmaydu. shun
 
 https://github.com/gheyret/UyghurASR/releases/download/v0/UyghurASR.zip
 
+**Diqqet**
+
+Eger xataliq körülse, [Microsoft Visual C++ Redistributable packages](https://aka.ms/vs/17/release/vc_redist.x64.exe) ni ornitip sinap béqing.
+
 ## Diqqet
 Esli kodtin paydilinidighanlar esli kodni chüshürüp yayghandin kéyin, 
 https://github.com/gheyret/UyghurASR/releases/download/v0/uyghur_asr.onnx
