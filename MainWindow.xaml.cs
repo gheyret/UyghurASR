@@ -92,7 +92,7 @@ namespace UyghurASR
             string msg = await Task.Run(() => _recognizer.Preload(filePath));
             if (msg.Contains("<Tonu>"))
             {
-                double duration = _recognizer.Uzunluqi / 22050.0;
+                double duration = _recognizer.Uzunluqi / 16000.0;
                 TimeSpan finalTime = TimeSpan.FromSeconds(duration);
                 var uz = $"{finalTime.Hours}:{finalTime.Minutes:D2}:{finalTime.Seconds:D2}";
                 statusLabel.Text = $"{msg}\nUzunluqi : {uz}";
@@ -227,12 +227,19 @@ namespace UyghurASR
 
         protected override void OnContentRendered(EventArgs e)
         {
-            _recognizer = new UyghurSpeechRecognizer();
-            _audioRecorder = new AudioRecorder();
-            tabHojjet.IsEnabled = true;
-            tabMic.IsEnabled = true;
-            tabUzuksiz.IsEnabled = true;
-            base.OnContentRendered(e);
+            try
+            {
+                _recognizer = new UyghurSpeechRecognizer();
+                _audioRecorder = new AudioRecorder();
+                tabHojjet.IsEnabled = true;
+                tabMic.IsEnabled = true;
+                tabUzuksiz.IsEnabled = true;
+                base.OnContentRendered(e);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Xataliq koruldi.Qarighanda Microsoft Visual C++ Redistributable packages:\nhttps://aka.ms/vs/17/release/vc_redist.x64.exe\n ornitilmighan oxshaydu.\nXataliq uchuri:{ex.Message}", "Xataliq", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void buttonCopy_Click(object sender, RoutedEventArgs e)
