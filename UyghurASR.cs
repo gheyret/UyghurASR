@@ -21,7 +21,7 @@ namespace UyghurASR
         /// Generates a Mel spectrogram from an audio signal.
         /// </summary>
         /// 
-        private int _sample_rate;
+        public int _sample_rate;
         public AudioLoader(int sample_rate = 22050)
         {
             _sample_rate = sample_rate;
@@ -144,9 +144,18 @@ namespace UyghurASR
             }
         }
 
-        public string Recognize()
+        public IEnumerable<string> Recognize()
         {
-            return Recognize(_loader._audioBuffer);
+            int chunkSize = _loader._sample_rate * 60;
+            int overlap = _loader._sample_rate;
+            int start = 0;
+
+            while (start < this.Uzunluqi)
+            {
+                int length = Math.Min(chunkSize, this.Uzunluqi - start);
+                yield return Recognize(_loader._audioBuffer[start..(start + length)]);
+                start += chunkSize - overlap;
+            }
         }
 
 

@@ -121,21 +121,31 @@ namespace UyghurASR
             var st = (Style)FindResource("SecondaryButtonStyle");
             buttonRecognizeFile.Style = st;
             buttonBrowse.Style = st;
-
             tabMic.IsEnabled = false;
             tabUzuksiz.IsEnabled = false;
+
             try
             {
                 Mouse.OverrideCursor = Cursors.Wait;
+                await Task.Run(async () =>
+                {
+                    foreach (var asrtxt in _recognizer.Recognize())
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            textBoxResults.Text += asrtxt + Environment.NewLine;
+                            textBoxResults.ScrollToEnd();
+                        });
+                    }
+                });
 
-                string tonushNetijisi = await Task.Run(() => _recognizer.Recognize());
-                textBoxResults.Text = tonushNetijisi;
-                //textBoxResults.Background = Brushes.LightGreen;
                 Mouse.OverrideCursor = null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing audio file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Mouse.OverrideCursor = null;
+                MessageBox.Show($"Error processing audio file: {ex.Message}",
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
